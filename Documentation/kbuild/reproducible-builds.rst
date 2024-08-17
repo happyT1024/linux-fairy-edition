@@ -68,7 +68,7 @@ The build processes for some programs under the ``tools/``
 subdirectory do not completely support out-of-tree builds.  This may
 cause a later source package build using e.g. ``make rpm-pkg`` to
 include generated files.  You should ensure the source tree is
-pristine by running ``make mrproper`` or ``git clean -d -f -x`` before
+pristine by running ``make fairy`` or ``git clean -d -f -x`` before
 building a source package.
 
 Module signing

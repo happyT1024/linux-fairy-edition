@@ -96,7 +96,7 @@ Linux内核6.x版本 <http://kernel.org/>
  - 确保没有过时的 .o 文件和依赖项::
 
      cd linux
-     make mrproper
+     make fairy
 
    现在您应该已经正确安装了源代码。
 

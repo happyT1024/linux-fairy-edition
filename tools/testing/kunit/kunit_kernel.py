@@ -46,9 +46,9 @@ class LinuxSourceTreeOperations:
 		self._linux_arch = linux_arch
 		self._cross_compile = cross_compile
 
-	def make_mrproper(self) -> None:
+	def make_fairy(self) -> None:
 		try:
-			subprocess.check_output(['make', 'mrproper'], stderr=subprocess.STDOUT)
+			subprocess.check_output(['make', 'fairy'], stderr=subprocess.STDOUT)
 		except OSError as e:
 			raise ConfigError('Could not call make command: ' + str(e))
 		except subprocess.CalledProcessError as e:
@@ -257,7 +257,7 @@ class LinuxSourceTree:
 
 	def clean(self) -> bool:
 		try:
-			self._ops.make_mrproper()
+			self._ops.make_fairy()
 		except ConfigError as e:
 			logging.error(e)
 			return False

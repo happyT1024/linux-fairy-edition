@@ -2647,15 +2647,15 @@ sub build {
 	    run_command "mv $output_config $outputdir/config_temp" or
 		dodie "moving .config";
 
-	    run_command "$make mrproper" or dodie "make mrproper";
+	    run_command "$make fairy" or dodie "make fairy";
 
 	    run_command "mv $outputdir/config_temp $output_config" or
 		dodie "moving config_temp";
 	}
     } elsif (!$noclean) {
 	unlink "$output_config";
-	run_command "$make mrproper" or
-	    dodie "make mrproper";
+	run_command "$make fairy" or
+	    dodie "make fairy";
     }
 
     # add something to distinguish this build

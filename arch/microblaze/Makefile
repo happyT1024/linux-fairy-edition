@@ -90,4 +90,4 @@ define archhelp
   echo '  (minus the .dts extension).'
 endef
 
-MRPROPER_FILES += $(boot)/simpleImage.*
+FAIRY_FILES += $(boot)/simpleImage.*

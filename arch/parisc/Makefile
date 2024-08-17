@@ -186,7 +186,7 @@ install zinstall:
 	$(call cmd,install)
 
 CLEAN_FILES	+= lifimage
-MRPROPER_FILES	+= palo.conf
+FAIRY_FILES	+= palo.conf
 
 define archhelp
 	@echo  '* vmlinux	- Uncompressed kernel image (./vmlinux)'

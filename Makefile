@@ -268,7 +268,7 @@ export building_out_of_srctree srctree objtree VPATH
 
 version_h := include/generated/uapi/linux/version.h
 
-clean-targets := %clean mrproper cleandocs
+clean-targets := %clean fairy cleandocs
 no-dot-config-targets := $(clean-targets) \
 			 cscope gtags TAGS tags help% %docs check% coccicheck \
 			 $(version_h) headers headers_% archheaders archscripts \
@@ -319,7 +319,7 @@ ifneq ($(filter $(single-targets), $(MAKECMDGOALS)),)
     endif
 endif
 
-# For "make -j clean all", "make -j mrproper defconfig all", etc.
+# For "make -j clean all", "make -j fairy defconfig all", etc.
 ifneq ($(filter $(clean-targets),$(MAKECMDGOALS)),)
     ifneq ($(filter-out $(clean-targets),$(MAKECMDGOALS)),)
         mixed-build := 1
@@ -635,7 +635,7 @@ outputmakefile:
 		 -d $(srctree)/include/config -o \
 		 -d $(srctree)/arch/$(SRCARCH)/include/generated ]; then \
 		echo >&2 "***"; \
-		echo >&2 "*** The source tree is not clean, please run 'make$(if $(findstring command line, $(origin ARCH)), ARCH=$(ARCH)) mrproper'"; \
+		echo >&2 "*** The source tree is not clean, please run 'make$(if $(findstring command line, $(origin ARCH)), ARCH=$(ARCH)) fairy'"; \
 		echo >&2 "*** in $(abs_srctree)";\
 		echo >&2 "***"; \
 		false; \
@@ -1476,7 +1476,7 @@ endif # CONFIG_MODULES
 # Cleaning is done on three levels.
 # make clean     Delete most generated files
 #                Leave enough to build external modules
-# make mrproper  Delete the current configuration, and all generated files
+# make fairy  Delete the current configuration, and all generated files
 # make distclean Remove editor backup files, patch leftover files and the like
 
 # Directories & files removed with 'make clean'
@@ -1485,8 +1485,8 @@ CLEAN_FILES += vmlinux.symvers modules-only.symvers \
 	       compile_commands.json rust/test \
 	       rust-project.json .vmlinux.objs .vmlinux.export.c
 
-# Directories & files removed with 'make mrproper'
-MRPROPER_FILES += include/config include/generated          \
+# Directories & files removed with 'make fairy'
+FAIRY_FILES += include/config include/generated          \
 		  arch/$(SRCARCH)/include/generated .objdiff \
 		  debian snap tar-install PKGBUILD pacman \
 		  .config .config.old .version \
@@ -1509,16 +1509,16 @@ vmlinuxclean:
 
 clean: archclean vmlinuxclean resolve_btfids_clean
 
-# mrproper - Delete all generated files, including .config
+# fairy - Delete all generated files, including .config
 #
-mrproper: private rm-files := $(MRPROPER_FILES)
-mrproper-dirs      := $(addprefix _mrproper_,scripts)
+fairy: private rm-files := $(FAIRY_FILES)
+fairy-dirs      := $(addprefix _fairy_,scripts)
 
-PHONY += $(mrproper-dirs) mrproper
-$(mrproper-dirs):
-	$(Q)$(MAKE) $(clean)=$(patsubst _mrproper_%,%,$@)
+PHONY += $(fairy-dirs) fairy
+$(fairy-dirs):
+	$(Q)$(MAKE) $(clean)=$(patsubst _fairy_%,%,$@)
 
-mrproper: clean $(mrproper-dirs)
+fairy: clean $(fairy-dirs)
 	$(call cmd,rmfiles)
 	@find . $(RCS_FIND_IGNORE) \
 		\( -name '*.rmeta' \) \
@@ -1528,7 +1528,7 @@ mrproper: clean $(mrproper-dirs)
 #
 PHONY += distclean
 
-distclean: mrproper
+distclean: fairy
 	@find . $(RCS_FIND_IGNORE) \
 		\( -name '*.orig' -o -name '*.rej' -o -name '*~' \
 		-o -name '*.bak' -o -name '#*#' -o -name '*%' \
@@ -1558,8 +1558,8 @@ help:
 	@echo  'Cleaning targets:'
 	@echo  '  clean		  - Remove most generated files but keep the config and'
 	@echo  '                    enough build support to build external modules'
-	@echo  '  mrproper	  - Remove all generated files + config + various backup files'
-	@echo  '  distclean	  - mrproper + remove editor backup and patch files'
+	@echo  '  fairy	  - Remove all generated files + config + various backup files'
+	@echo  '  distclean	  - fairy + remove editor backup and patch files'
 	@echo  ''
 	@$(MAKE) -f $(srctree)/scripts/kconfig/Makefile help
 	@echo  ''

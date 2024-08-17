@@ -107,7 +107,7 @@ Installing the kernel source
  - Make sure you have no stale .o files and dependencies lying around::
 
      cd linux
-     make mrproper
+     make fairy
 
    You should now have the sources correctly installed.
 

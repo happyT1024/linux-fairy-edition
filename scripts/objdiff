@@ -23,7 +23,7 @@
 # And to clean up (everything is in .objdiff/*)
 # $ ./scripts/objdiff clean all
 #
-# Note: 'make mrproper' will also remove .objdiff
+# Note: 'make fairy' will also remove .objdiff
 
 SRCTREE=$(cd $(git rev-parse --show-toplevel 2>/dev/null); pwd)
 

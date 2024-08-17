@@ -99,7 +99,7 @@ Linux內核6.x版本 <http://kernel.org/>
  - 確保沒有過時的 .o 文件和依賴項::
 
      cd linux
-     make mrproper
+     make fairy
 
    現在您應該已經正確安裝了源代碼。
 
